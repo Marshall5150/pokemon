@@ -1,0 +1,16 @@
+<form action="">
+  <div class="form-group">
+    <label for="pokemonSearch" class="screen-reader-only"
+      >Search for a Pokemon</label
+    >
+    <input
+      type="search"
+      id="pokemonSearch"
+      name="pokemonSearch"
+      class="search-box"
+      placeholder="Search for a Pokemon"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="handleSearch($event)"
+    />
+  </div>
+</form>

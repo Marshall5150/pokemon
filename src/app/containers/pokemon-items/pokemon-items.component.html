@@ -1,0 +1,44 @@
+<div class="header">
+  <div class="content-container">
+    <h1>Pokedex</h1>
+  </div>
+</div>
+
+<div class="content-container">
+  <app-pokemon-filter
+    (searchChange)="handleSearch($event)"
+  ></app-pokemon-filter>
+
+  <div class="loader" *ngIf="!isLoaded">
+    <div class="loader__pokeball"></div>
+    Loading your Pokemon...
+  </div>
+  <div *ngIf="isLoaded && pokemonApi">
+    <p class="font-weight-bold">Total: {{ filteredPokemonList.length }}</p>
+    <div *ngIf="searchTerm !== '' && filteredPokemonList.length === 0">
+      <p>No Pokemon matching "{{ searchTerm }}"</p>
+    </div>
+    <div class="grid-items">
+      <div
+        *ngFor="
+          let pokemon of filteredPokemonList
+            | paginate
+              : {
+                  itemsPerPage: 12,
+                  currentPage: page,
+                  totalItems: filteredPokemonList.length
+                }
+        "
+      >
+        <app-pokemon-item [pokemon]="pokemon"></app-pokemon-item>
+      </div>
+    </div>
+  </div>
+
+  <pagination-controls
+    (pageChange)="pageChange($event)"
+    [autoHide]="true"
+    [responsive]="true"
+  >
+  </pagination-controls>
+</div>

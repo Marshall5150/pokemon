@@ -1,0 +1,38 @@
+<div
+  class="card"
+  *ngIf="pokemon.details"
+  [ngClass]="'card--' + pokemon.details.types[0].type.name"
+>
+  <p class="hp">
+    <span>HP</span>
+    {{ pokemon.details.stats[0].base_stat }}
+  </p>
+  <img
+    [src]="pokemon.details.sprites.front_default"
+    [alt]="'Image of ' + pokemon.name"
+  />
+  <h2 class="text-align-center">{{ pokemon.name | titlecase }}</h2>
+  <ul class="tags">
+    <li
+      *ngFor="let type of pokemon.details.types"
+      class="tags__item"
+      [ngClass]="'tags__item--' + type.type.name"
+    >
+      {{ type.type.name | titlecase }}
+    </li>
+  </ul>
+  <div class="flex-space-between text-align-center">
+    <div>
+      <h3>{{ pokemon.details.stats[1].base_stat }}</h3>
+      <p>Attack</p>
+    </div>
+    <div>
+      <h3>{{ pokemon.details.stats[2].base_stat }}</h3>
+      <p>Defense</p>
+    </div>
+    <div>
+      <h3>{{ pokemon.details.stats[5].base_stat }}</h3>
+      <p>Speed</p>
+    </div>
+  </div>
+</div>
